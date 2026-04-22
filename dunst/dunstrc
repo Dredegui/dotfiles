@@ -1,0 +1,14 @@
+[global]
+    width = 0
+    origin = top-right
+    offset = 15x40 # Horizontal offset x Vertical offset
+    frame_width = 2
+    corner_radius = 5
+    gap_size = 2
+    padding = 2
+    font = JetBrainsMono Nerd Font 9
+    show_age_threshold = -1
+    icon_theme = Adwaita
+    enable_recursive_icon_lookup = true
+    line_height = 2
+
