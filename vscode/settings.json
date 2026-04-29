@@ -1,0 +1,79 @@
+{
+	"editor.inlineSuggest.enabled": true,
+	"github.copilot.enable": {
+		"*": true,
+		"plaintext": true,
+		"markdown": true,
+		"scminput": false,
+		"dart": false,
+		"python": false,
+		"clojure": true,
+		"yaml": false,
+		"rust": true,
+		"bat": true,
+		"c": true
+	},
+	"editor.minimap.enabled": false,
+	"zenMode.hideStatusBar": false,
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"github.copilot.editor.enableAutoCompletions": true,
+	"markdown-preview-enhanced.mathBlockDelimiters": [
+		[
+			"$$",
+			"$$"
+		],
+		[
+			"\\[",
+			"\\]"
+		]
+	],
+	"cmake.options.statusBarVisibility": "visible",
+	"redhat.telemetry.enabled": false,
+	"git.openRepositoryInParentFolders": "always",
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"remote.SSH.remotePlatform": {
+		"linux-laptop": "linux",
+		"lease": "linux",
+		"proteina06": "linux",
+		"vitamina05": "linux"
+	},
+	"python.defaultInterpreterPath": "/bin/python3",
+	"github.copilot.nextEditSuggestions.enabled": false,
+	"security.workspace.trust.untrustedFiles": "open",
+	"containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+	"git.autofetch": true,
+	"python.analysis.typeCheckingMode": "basic",
+	"window.autoDetectColorScheme": true,
+	"markdown-preview-enhanced.previewTheme": "atom-light.css",
+	"workbench.activityBar.location": "top",
+	"[python]": {
+		"diffEditor.ignoreTrimWhitespace": false,
+		"editor.defaultColorDecorators": "never"
+	},
+	"settingsSync.ignoredSettings": [
+		"-markdown-preview-enhanced.chromePath"
+	],
+	"markdown-preview-enhanced.chromePath": "/usr/bin/google-chrome",
+	"workbench.sideBar.location": "right",
+	"chat.tools.terminal.autoApprove": {
+		"lxc": true,
+		"fc-match": true,
+		"fc-list": true
+	},
+	"git.confirmSync": false,
+	"[c]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	},
+	"chat.agentSessionsViewLocation": "single-view",
+	"chat.viewSessions.enabled": false,
+	"github.copilot.nextEditSuggestions.eagerness": "auto",
+	"workbench.preferredDarkColorTheme": "Dark Modern",
+	"workbench.preferredLightColorTheme": "Visual Studio Dark - C++",
+}
