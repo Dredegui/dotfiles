@@ -1,0 +1,40 @@
+{
+  "deployments": [
+    {
+      "source": "polybar-config",
+      "destination": "~/.config/polybar/config.ini"
+    },
+    {
+      "source": "dunst-config",
+      "destination": "~/.config/dunst/dunstrc"
+    },
+    {
+      "source": "kitty.conf",
+      "destination": "~/.config/kitty/m3-colors.conf"
+    },
+    {
+      "source": "colors.Xresources",
+      "destination": "~/.Xresources"
+    },
+    {
+      "source": "colors-tty.sh",
+      "destination": "~/.config/m3-colors/colors-tty.sh"
+    },
+    {
+      "source": "gtk.css",
+      "destination": "~/.local/share/themes/FlatColor-dark/gtk-3.0/gtk.css"
+    },
+    {
+      "source": "gtk.3.20",
+      "destination": "~/.local/share/themes/FlatColor-dark/gtk-3.20/gtk.css"
+    },
+    {
+      "source": "gtkrc",
+      "destination": "~/.local/share/themes/FlatColor-dark/gtk-2.0/gtkrc"
+    },
+    {
+      "source": "vscode-settings.json",
+      "destination": "~/.config/Code/User/settings.json"
+    }
+  ]
+}
