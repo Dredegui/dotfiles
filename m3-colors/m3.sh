@@ -23,4 +23,4 @@ if [ -f "$WALLPAPER" ]; then
   echo "$LAST_MODIFIED" > "$LAST_RUN_FILE"
 fi
 
-/home/gui/m3/.venv/bin/m3wal $WALLPAPER --full --variant FIDELITY --mode dark
+"$HOME/m3/.venv/bin/m3wal" "$WALLPAPER" --full --variant FIDELITY --mode dark
