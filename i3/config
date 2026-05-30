@@ -21,7 +21,8 @@ font pango:monospace 15
 ##############################
 
 #border indicator on windows:
-default_border pixel 4 
+default_border pixel 2
+smart_borders on
 
 # start browser
 bindsym $mod+b exec google-chrome-stable
@@ -31,7 +32,7 @@ hide_edge_borders both
 
 # Set inner/outer gaps
 gaps inner 2
-gaps outer 2
+gaps outer 0
 
 # show window title bars (not officially supported with i3gaps)
 # default_border normal
@@ -39,7 +40,7 @@ gaps outer 2
 title_align center
 
 # Get borders out (ThePrimeagen dotfiles)
-#for_window [class="^.*"] border pixel 2
+# for_window [class="^.*"] border pixel 2
 			# class			border	backgr.	text	indict.	child_border
 #for_window [class="^.*"] client.focused		#77dd77 #285577 #ffffff #2e9ef4 #285577
 
@@ -62,6 +63,12 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Gnome keyring is a daemon to store passwords and secrets, and gnome-keyring-daemon
+# is the program that starts it. If you use gnome-keyring, you need to start it in order to use the keyring, and you need to set the appropriate environment
+# variables for it to work. See https://wiki.archlinux.org/title/GNOME/Keyring for more information.
+# exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+exec --no-startup-id eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -81,14 +88,14 @@ bindsym $mod+Return exec kitty
 # Make any window sticky (permanently visible on all workspaces)
 bindsym $mod+Shift+Return sticky toggle
 
-bindsym $mod+Shift+b exec --no-startup-id i3-msg 'border toggle 4'
-# bindsym $mod+Shift+p exec --no-startup-id i3-msg 'border normal 4 none'
+# bindsym $mod+Shift+b exec --no-startup-id i3-msg 'border toggle 4'
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -184,26 +191,17 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c exec --no-startup-id killall polybar; killall picom; i3-msg restart
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# start powermenu
+# bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-5/powermenu.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ccedilla resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -224,20 +222,20 @@ bindsym $mod+r mode "resize"
 # picom: https://wiki.archlinux.org/title/Picom
 # manpage: https://man.archlinux.org/man/picom.1.en
 # The default configuration is available in /etc/xdg/picom.conf 
-# for custom config: exec_always --no-startup-id picom --config  ~/.config/picom.conf
+# for custom config: exec_always --no-startup-id picom --config  ~/.config/picom.conf --experimental-backends
 #exec_always --no-startup-id picom -b --fade-in-step=1 --fade-out-step=1 --fade-delta=0 --config ~/.config/picom/picom.conf
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
 
-exec_always --no-startup-id picom --experimental-backends -b --config ~/.config/picom/picom.conf
 ##################
 # floating rules #
 ##################
-
 
 # set floating (nontiling) for special apps
 for_window [window_role="About"] floating enable
 
 # set size of floating window
 for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
+for_window [window_role="(?i)GtkFileChooserDialog"] border pixel 2
 
 # set position of floating window
 for_window [class=".*"] move position center
@@ -259,20 +257,18 @@ set $grey		#b0b5bd
 set $yellowbrown	#e1b700
 set $cyan               #00b5bd
 
-set $main_border        #4b0000
-set $background         #202020
-set $text               #ffffff
-set $inactive           #383c4a
-set $urgent             #e53935
-set $urgent_indicator   #e1b700
+set_from_resource $fg m3onSurfaceVariant
+set_from_resource $bg m3outlineVariant
+set_from_resource $ac m3primary
+set_from_resource $bac m3onPrimaryFixed
 
-
-# define colors for windows:
-#class		        	border		bground		        text		indicator	    child_border    
-client.focused		    	$main_border    $background  		$main_border    $main_border        $main_border
-client.unfocused	    	$inactive	$background  		$inactive	$inactive	    $inactive
-client.focused_inactive		$inactive	$background  		$inactive	$inactive	    $inactive
-client.urgent		    	$urgent 	$urgent 		$text   	$urgent_indicator   $urgent_indicator
+# class                 border  backgr. text indicator child_border
+client.focused          $ac     $ac     $bac $ac       $ac
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -281,12 +277,14 @@ client.urgent		    	$urgent 	$urgent 		$text   	$urgent_indicator   $urgent_indi
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% # increase screen brightness
 # bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- # decrease screen brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/.config/scripts/control-brightness.sh 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/.config/scripts/control-brightness.sh 0 # decrease screen brightness
+
+# Special hyper brightness key (if available)
+bindsym $mod+Shift+b exec --no-startup-id $HOME/.config/scripts/toggle-boverride.sh # toggle brightness override for current monitor 
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -303,51 +301,84 @@ bindsym Print exec $HOME/.config/scripts/screenshot.sh
 # interactive screenshot by pressing 
 bindsym $mod+Print exec gnome-screenshot -i 
 
-
-set $wallpaper ~/Pictures/wallpapers/sunset.jpg 
 # Wallpaper
-exec_always --no-startup-id feh --bg-scale $wallpaper 
+# set $wallpaper $HOME/.config/wallpaper/current.jpg
+#exec_always --no-startup-id rm $HOME/.config/m3-colors/output/current_*_scheme.* 
+#exec_always --no-startup-id $HOME/m3/.venv/bin/m3wal $wallpaper --full --variant FIDELITY --mode dark
+exec_always --no-startup-id $HOME/.config/m3-colors/m3.sh
+
+# Notes
+bindsym $mod+n exec rofi -dmenu -p "Notes" < ~/notes.txt > /tmp/notes_tmp && cat /tmp/notes_tmp >> ~/notes.txt
+
+bindsym $mod+Shift+n exec --no-startup-id i3-sensible-terminal -t notes -e vim ~/notes.txt
+
+# Wallpaper picker
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/wallpaper/picker.sh
+
+# Move any window with title "notes" to scratchpad
+# for_window [title="rofi - Notes"] resize set 600 400
+
+
+# Fix mic port
+#exec_always --no-startup-id pactl set-source-port alsa_input.pci-0000_05_00.6.analog-stereo analog-input-mic
+
+# set $wallpaper ~/Pictures/wallpapers/sunset.jpg lock.png
+#exec_always --no-startup-id feh --bg-scale $wallpaper
 
 # Startup disposition
 assign [class="kitty"] $ws2
 assign [class="Code"] $ws3
 assign [class="obs"] $ws9
-assign [class="WhatsApp Desktop"] $ws10
+assign [class="spotify"] $ws9
+assign [class="Spotify"] $ws9
 assign [class="discord"] $ws10
+assign [class="whatsapp-desktop-linux"] $ws10
 
 exec --no-startup-id google-chrome
-exec --no-startup-id kitty
-exec --no-startup-id whatsapp-linux-desktop
-exec --no-startup-id discord
+exec --no-startup-id Kitty
+#exec --no-startup-id whatsapp-linux-desktop
+#exec --no-startup-id discord
 
 # Second monitor
 # exec_always --no-startup-id ~/.config/scripts/display-setup.sh
 
 # Check xrandr
 # Get if its name is eDP-1 or eDP
-exec_always --no-startup-id xrandr --output HDMI-1-0 --above eDP --auto
-workspace $ws1 output eDP
-workspace $ws2 output eDP
-workspace $ws3 output eDP
-workspace $ws4 output eDP
-workspace $ws5 output eDP
-workspace $ws6 output eDP
-workspace $ws7 output HDMI-1-0
-workspace $ws8 output HDMI-1-0
-workspace $ws9 output eDP
-workspace $ws10 output eDP
-
-# exec_always --no-startup-id xrandr --output HDMI-1-0 --left-of eDP-1 --auto
-#workspace $ws1 output eDP-1
-#workspace $ws2 output eDP-1
-#workspace $ws3 output eDP-1
-#workspace $ws4 output eDP-1
-#workspace $ws5 output eDP-1
-#workspace $ws6 output eDP-1
+#exec_always --no-startup-id xrandr --output HDMI-1-0 --above eDP --auto
+#workspace $ws1 output eDP
+#workspace $ws2 output eDP
+#workspace $ws3 output eDP
+#workspace $ws4 output eDP
+#workspace $ws5 output eDP
+#workspace $ws6 output eDP
 #workspace $ws7 output HDMI-1-0
 #workspace $ws8 output HDMI-1-0
-#workspace $ws9 output eDP-1
-#workspace $ws10 output eDP-1
+#workspace $ws9 output eDP
+#workspace $ws10 output eDP
+
+# exec_always --no-startup-id xrandr --output HDMI-1-0 --left-of eDP-1 --auto
+# exec_always --no-startup-id xrandr --output HDMI-1-0 --above eDP-1 --auto
+# workspace $ws1 output eDP-1
+# workspace $ws2 output eDP-1
+# workspace $ws3 output eDP-1
+# workspace $ws4 output eDP-1
+# workspace $ws5 output eDP-1
+# workspace $ws6 output eDP-1
+# workspace $ws7 output HDMI-1-0
+# workspace $ws8 output HDMI-1-0
+# workspace $ws9 output eDP-1
+# workspace $ws10 output eDP-1
+
+workspace $ws1 output eDP-1
+workspace $ws2 output eDP-1
+workspace $ws3 output eDP-1
+workspace $ws4 output eDP-1
+workspace $ws5 output eDP-1
+workspace $ws6 output eDP-1
+workspace $ws7 output eDP-1
+workspace $ws8 output eDP-1
+workspace $ws9 output eDP-1
+workspace $ws10 output eDP-1
 
 # Toggle theme
 bindsym $mod+Shift+t exec --no-startup-id ~/.config/scripts/toggle_theme.sh

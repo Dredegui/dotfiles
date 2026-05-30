@@ -1,5 +1,6 @@
-import os
 import json
+import os
+import sys
 
 generated_file_colors = os.path.expanduser("~/.cache/m3-colors/vscode-settings.json")
 target_file = os.path.expanduser("~/.config/Code/User/settings.json")
@@ -22,8 +23,8 @@ def update_vscode_settings():
         except json.JSONDecodeError:
             vscode_settings = {}
 
-    vscode_settings['workbench.colorCustomizations'] = generated_colors
-
+    vscode_settings['workbench.colorCustomizations'] = generated_colors['workbench.colorCustomizations']
+    
     with open(target_file, 'w') as f:
         json.dump(vscode_settings, f, indent=4)
 

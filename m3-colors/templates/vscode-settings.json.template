@@ -80,18 +80,6 @@
   "window.zoomLevel": 1,
   "breadcrumbs.enabled": false,
   "workbench.colorCustomizations": {
-	  // "editor.background": "{{m3surface}}",
-    // "editor.foreground": "{{m3onSurface}}",
-    // "editorLineNumber.foreground": "{{m3outlineVariant}}",
-    // "editorLineNumber.activeForeground": "{{m3primary}}",
-    // "editorCursor.foreground": "{{m3primary}}",
-    // "editorPane.background": "{{m3surface}}",
-    // "editorBracketHighlight.foreground1": "{{m3primary}}",
-    // "editorBracketHighlight.foreground2": "{{m3secondary}}",
-    // "editorBracketHighlight.foreground3": "{{m3tertiary}}",
-    // "editorBracketHighlight.foreground4": "{{m3onSurfaceVariant}}",
-    // "editorBracketHighlight.unexpectedBracket.foreground": "{{m3error}}",
-	// --- Editor & Glass Pane ---
     "titleBar.activeBackground": "{{m3surfaceContainerLow}}",
     "titleBar.activeForeground": "{{m3onSurface}}",
     "titleBar.inactiveBackground": "{{m3surfaceContainerLow}}",
@@ -119,7 +107,6 @@
     "editorWidget.foreground": "{{m3onSurface}}",
     "editorWidget.border": "{{m3outline}}",
 
-	  // --- Header & Tabs ---
 	  "editorGroupHeader.tabsBackground": "{{m3surfaceContainerLow}}",
     "editorGroupHeader.tabsBorder": "{{m3outlineVariant}}",
     "editorGroupHeader.noTabsBackground": "{{m3surfaceContainerLow}}",
@@ -132,7 +119,6 @@
 	  "tab.hoverBackground": "{{m3surfaceContainerHigh}}",
     "tab.activeBorderTop": "#00000000",
 
-	// --- Sidebar & Activity Bar ---
     "sideBar.background": "{{m3surfaceContainerLow}}",
     "sideBar.foreground": "{{m3onSurface}}",
     "sideBar.border": "{{m3outlineVariant}}",
@@ -146,7 +132,6 @@
     "statusBar.background": "{{m3surfaceContainerLowest}}",
     "statusBar.foreground": "{{m3onSurfaceVariant}}",
 
-	// --- Inputs, Lists & Notifications ---
     "input.background": "{{m3surfaceContainerHigh}}",
     "input.foreground": "{{m3onSurface}}",
     "input.border": "{{m3outline}}",

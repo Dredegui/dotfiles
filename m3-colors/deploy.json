@@ -31,10 +31,6 @@
     {
       "source": "gtkrc",
       "destination": "~/.local/share/themes/FlatColor-dark/gtk-2.0/gtkrc"
-    },
-    {
-      "source": "vscode-settings.json",
-      "destination": "~/.config/Code/User/settings.json"
     }
   ]
 }

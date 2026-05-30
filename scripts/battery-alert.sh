@@ -13,9 +13,9 @@ NORMAL_BRIGHTNESS=100
 
 
 # Check if battery is below threshold and discharging
-if [[ "$battery_level" -le 20 && "$status" == "Discharging" ]]; then
+if [[ "$battery_level" -le 5 && "$status" == "Discharging" ]]; then
     # Send notification
-    notify-send -u critical -r $NOTIFY_ID "Battery Low (${battery_level}%)"
+    # notify-send -u critical -r $NOTIFY_ID "Battery Low (${battery_level}%)"
     # notify-send -u critical -r $NOTIFY_ID "Battery Low" "Battery level is ${battery_level}%." --- IGNORE ---
 
     # Dim the screen

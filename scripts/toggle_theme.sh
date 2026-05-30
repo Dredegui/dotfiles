@@ -5,6 +5,12 @@ GTK_THEME_KEY="org.gnome.desktop.interface gtk-theme"
 COLOR_SCHEME_KEY="org.gnome.desktop.interface color-scheme"
 GTK_FILE="$HOME/.config/gtk-3.0/settings.ini"
 
+# Set this to the base GTK theme you are currently using.
+# The script will derive the dark variant by appending "-dark".
+GTK_THEME_BASE="FlatColor"
+GTK_THEME_LIGHT="${GTK_THEME_LIGHT:-$GTK_THEME_BASE}"
+GTK_THEME_DARK="${GTK_THEME_DARK:-$GTK_THEME_BASE}"
+
 # Read current theme
 current_theme=$(grep "gtk-theme-name" "$GTK_FILE" | cut -d= -f2 | tr -d ' ')
 # Get PID of Chrome if running
@@ -76,14 +82,14 @@ else
 fi
 
 
-if [ "$current_theme" = "Yaru-dark" ]; then
+if [ "$current_theme" = "$GTK_THEME_DARK" ]; then
     # Switch to Light
-    sed -i 's/gtk-theme-name=.*/gtk-theme-name=Yaru/' "$GTK_FILE"
+    sed -i "s/gtk-theme-name=.*/gtk-theme-name=${GTK_THEME_LIGHT}/" "$GTK_FILE"
     gsettings set $COLOR_SCHEME_KEY 'default'
     notify-send "Switched to Light Mode"
 else
     # Switch to Dark
-    sed -i 's/gtk-theme-name=.*/gtk-theme-name=Yaru-dark/' "$GTK_FILE"
+    sed -i "s/gtk-theme-name=.*/gtk-theme-name=${GTK_THEME_DARK}/" "$GTK_FILE"
     gsettings set $COLOR_SCHEME_KEY 'prefer-dark'
     notify-send "Switched to Dark Mode"
 fi

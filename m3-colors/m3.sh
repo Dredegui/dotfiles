@@ -16,6 +16,7 @@ if [ -f "$WALLPAPER" ]; then
     LAST_RUN=$(cat "$LAST_RUN_FILE")
     if [ "$LAST_MODIFIED" -le "$LAST_RUN" ]; then
       notify-send "M3 Colors" "Wallpaper has not changed since last run. Exiting."
+      feh --bg-scale $WALLPAPER
       # echo "Wallpaper has not changed since last run. Exiting."
       exit 0
     fi
